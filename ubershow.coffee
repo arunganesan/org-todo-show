@@ -1,8 +1,6 @@
 refreshFrequency: 60000
 
-showagenda = '~/org/todo.org'
-
-command: "cat #{showagenda}"
+command: 'python ~/repos/org-todo-show/extract_tasks.py'
 
 style: """
   top: 40px
@@ -10,36 +8,41 @@ style: """
   color: #fff
   font-family: Helvetica Neue
 
-  h
+  h1
     display: block
     text-align: left
     font-size: 24px
     font-weight: 100
 
-  div
-    display: block
-    text-shadow: 0 0 1px rgba(#000, 0.5)
-    font-size: 50px
-
-  ol
+  .list
     padding-left: 20px
 
-  .completed
-    color: #888
-    font-weight: regular
-    text-decoration:line-through
+  .highpri
+    color: #D95204
 
-
-  .todolist
-    padding-left: 20px
+  .mediumpri
+    color: #F2B705
+  
+  .lowpri
+    color: #84BF04
 """
 
-
 render: -> """
-    <h>todo</h>
-    <pre class='todolist'></pre>
 
+    <pre class='todolist list'></pre>
+
+    <pre class='highpri list'></pre>
+
+
+    <pre class='mediumpri list'></pre>
+
+
+    <pre class='lowpri list'></pre>
 """
 
 update: (output, domEl) ->
-  $(domEl).find('.todolist').html(output)
+  parts = output.split('###')
+  $(domEl).find('.todolist').html(parts[0])
+  $(domEl).find('.highpri').html(parts[1])
+  $(domEl).find('.mediumpri').html(parts[2])
+  $(domEl).find('.lowpri').html(parts[3])
