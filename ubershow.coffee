@@ -1,4 +1,4 @@
-refreshFrequency: 60000
+refreshFrequency: 5000
 
 command: 'python ~/repos/org-todo-show/extract_tasks.py'
 

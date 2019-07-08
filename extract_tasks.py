@@ -18,7 +18,18 @@ def find_tasks (filename, condition):
     for node in root:
         if condition(node):
             if hasattr(node, 'heading'):
-                tasks.append(node.heading)
+                #print dir(node)
+                joined = []
+                n = node
+                while True:
+                    if n.is_root():
+                        break
+                    joined.insert(0, n.heading)
+                    n = n.parent
+                
+                tasks.append('/'.join(joined))
+                
+                #tasks.append(node.heading)
     return tasks
 
 def pri_check (level):
