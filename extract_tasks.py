@@ -18,7 +18,6 @@ def find_tasks (filename, condition):
     for node in root:
         if condition(node):
             if hasattr(node, 'heading'):
-                #print dir(node)
                 joined = []
                 n = node
                 while True:
@@ -35,7 +34,6 @@ def find_tasks (filename, condition):
                         combined_str += j
 
                 tasks.append(combined_str)
-                
                 #tasks.append(node.heading)
     return tasks
 
@@ -50,6 +48,9 @@ def pri_check (level):
 SIDE_PROJ = '/Volumes/Transcend/Dropbox/Orgmode/side-projects.org'
 TODO = '/Volumes/Transcend/Dropbox/Orgmode/todo.org'
 
+def today_check (node):
+    return 'today' in node.tags
+
 def main():
     todo_tasks = find_tasks(TODO, lambda n: True)
     print '\n'.join(todo_tasks)
@@ -57,6 +58,11 @@ def main():
         print '###'
         tasks = find_tasks(SIDE_PROJ, pri_check(pri))
         print '\n'.join(tasks)
+
+    # get "today" tagged items
+    print '###'
+    tasks = find_tasks(SIDE_PROJ, today_check)
+    print '\n'.join(tasks)
 
 if __name__ == '__main__':
     main()
