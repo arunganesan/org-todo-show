@@ -61,7 +61,9 @@ def main():
 
     # get "today" tagged items
     print '###'
-    tasks = find_tasks(SIDE_PROJ, today_check)
+    side_tasks = find_tasks(SIDE_PROJ, today_check)
+    todo_tasks = find_tasks(TODO, today_check)
+    tasks = side_tasks + todo_tasks
     print '\n'.join(tasks)
 
 if __name__ == '__main__':
