@@ -27,7 +27,14 @@ def find_tasks (filename, condition):
                     joined.insert(0, n.heading)
                     n = n.parent
                 
-                tasks.append('/'.join(joined))
+                combined_str = ''
+                for ji, j in enumerate(joined):
+                    if ji < len(joined) - 1:
+                        combined_str += '[' + j + '] '
+                    else:
+                        combined_str += j
+
+                tasks.append(combined_str)
                 
                 #tasks.append(node.heading)
     return tasks
