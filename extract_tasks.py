@@ -57,6 +57,7 @@ def main():
     for pri in ['A', 'B', 'C']:
         print '###'
         tasks = find_tasks(SIDE_PROJ, pri_check(pri))
+        tasks += find_tasks(TODO, pri_check(pri))
         print '\n'.join(tasks)
 
     # get "today" tagged items
